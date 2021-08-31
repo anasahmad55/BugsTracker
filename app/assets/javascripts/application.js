@@ -14,3 +14,19 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+
+var featureOrBug = {
+    bug: ["new", "started", "resolved"],
+    feature: ["new", "started", "complete"],
+}
+
+function changeStatus(value) {
+    if (value.length == 0) document.getElementById("bug_status").innerHTML = "<option></option>";
+    else {
+        var statusOptions = "";
+        for (id in featureOrBug[value]) {
+            statusOptions += "<option>" + featureOrBug[value][id] + "</option>";
+        }
+        document.getElementById("bug_status").innerHTML = statusOptions;
+    }
+}
