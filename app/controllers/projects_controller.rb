@@ -14,6 +14,14 @@ class ProjectsController < ApplicationController
 
   def index
     @projects = Project.all
+
+    # Project.joins(:user_projects, :user).where(user_type: 'developer')
+    # if current_user.user_type == "developer"
+    #   @projects = Project.find_by(id:)
+    #   # @Project = Project.joins(:user_projects, :user).where(user_type: 'developer')
+    # elsif current_user.user_type == "qa"
+    #   @projects = Project.find_by(user_type: "qa")
+    # end
   end
 
   def show
@@ -32,5 +40,11 @@ class ProjectsController < ApplicationController
     else
       render 'edit'
     end
+  end
+
+  def destroy
+    @project = Project.find(params[:id])
+    @project.destroy
+    redirect_to projects_path
   end
 end

@@ -1,2 +1,19 @@
-<%= @project.name %>
+Project title : <%= @project.name %>
+<% if current_user.user_type == 'manager' %>
 <%= link_to 'edit project',edit_project_path(@project) , class: "btn btn-success" %>
+  <%= link_to 'delete project',project_path(@project),method: :delete, data: {confirm: "Are you sure"}, class: "btn btn-danger"%>
+  <%end %>
+<p>
+  Users : <br>
+  <% @project.users.each do |user| %>
+  <%= user.name %><br>
+  <% end %>
+</p>
+
+<p>
+  Bugs : <br>
+  <% @project.bugs.each do |bug| %>
+    title : <%= bug.title %><br>
+    type  : <%= bug.status %><br>
+  <% end %>
+</p>

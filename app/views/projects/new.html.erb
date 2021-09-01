@@ -3,10 +3,10 @@
   <%= f.label :name %><br>
   <%= f.text_field :name %><br>
 
-  <%= f.label :user_id,'user names'  %><br>
-  <%= f.collection_select(:user_id, User.all, :id, :name,
+  <%= f.label :name  %><br>
+  <%= f.collection_select(:user_ids, User.all, :id, :name,
                           {prompt: "Make your selection from the list below (can't be empty)"},
-                          { multiple: true}) %>
+                          { multiple: true, size: 3, class: "custom-select shadow rounded" }) %>
 
 
   <%= f.submit class: "btn btn-success" %>
