@@ -14,14 +14,9 @@ class ProjectsController < ApplicationController
 
   def index
     @projects = Project.all
-
-    # Project.joins(:user_projects, :user).where(user_type: 'developer')
-    # if current_user.user_type == "developer"
-    #   @projects = Project.find_by(id:)
-    #   # @Project = Project.joins(:user_projects, :user).where(user_type: 'developer')
-    # elsif current_user.user_type == "qa"
-    #   @projects = Project.find_by(user_type: "qa")
-    # end
+    if current_user.user_type == "developer"
+      @projects = current_user.projects
+    end
   end
 
   def show

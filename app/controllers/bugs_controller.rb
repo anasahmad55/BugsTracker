@@ -8,7 +8,7 @@ class BugsController < ApplicationController
   end
 
   def create
-    @bug = Bug.new(params.require(:bug).permit(:title, :description, :deadline, :bug_type, :status, :project_id, :image))
+    @bug = Bug.new(params.require(:bug).permit(:title, :description, :deadline, :bug_type, :status, :project_id, :screenshot))
     @bug.user_id = current_user.id
     if @bug.save
       redirect_to bugs_path
@@ -19,6 +19,20 @@ class BugsController < ApplicationController
 
   def show
     @bug = Bug.find(params[:id])
+  end
+
+  def edit
+    @bug = Bug.find(params[:id])
+  end
+
+  def update
+    @bug = Bug.find(params[:id])
+    if @bug.update(params.require(:bug).permit(:status))
+      flash[:notice] = "#{@bug.title} updated successfully"
+      redirect_to @bug
+    else
+      render 'edit'
+    end
   end
 
 end

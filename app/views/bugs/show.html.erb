@@ -1,12 +1,9 @@
 <h1><%=@bug.bug_type%> details</h1>
 Title : <%= @bug.title %><br>
 Description : <%= @bug.description %><br>
-image : <%= image_tag @bug.image%>
-<%= form_with(model: @bug) do |f| %>
+<%= form_for(@bug, url: bug_path(@bug) , html: {method: :patch}) do |f| %>
   <%= f.label :status%><br>
   <%= f.select :status, ['new', 'started', 'resolved']%>
   <%= f.submit "save" %>
 <% end %>
-
-
 project name : <%= @bug.project.name %>

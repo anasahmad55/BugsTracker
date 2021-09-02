@@ -9,8 +9,8 @@
   <%= f.label :deadline  %><br>
   <%= f.datetime_local_field :deadline%><br>
 
-  <%= f.label :image  %><br>
-  <%= f.file_field :image %><br>
+  <%= f.label :screenshot  %><br>
+  <%= f.file_field :screenshot %><br>
 
 
   <select name="bug[bug_type]" id="bug_bug_type" onChange="changeStatus(this.value);">
@@ -27,20 +27,6 @@
   <%= f.label :project_id,'Project name'  %><br>
   <%= f.collection_select(:project_id, Project.all, :id, :name,
                           { prompt: "Make your selection from the list below (can't be empty)"}) %>
-
-<!--  <select name="meal" id="meal" onChange="changecat(this.value);">-->
-<!--    <option value="" disabled selected>Select</option>-->
-<!--    <option value="A">A</option>-->
-<!--    <option value="B">B</option>-->
-<!--    <option value="C">C</option>-->
-<!--  </select>-->
-<!--  <select name="category" id="category">-->
-<!--    <option value="" disabled selected>Select</option>-->
-<!--  </select>-->
-
-<!--  <%#= f.label :status  %><br>-->
-
-<!--  <%#= f.select :status, ['feature', 'bug']%><br>-->
 
   <%= f.submit class: "btn btn-success" %>
 

@@ -1,14 +1,8 @@
-<%= render 'shared/error', obj:@project%>
-<%= form_with(model: @project, local: true ) do |f|%>
-  <%= f.label :name %><br>
-  <%= f.text_field :name %><br>
-
-  <%= f.label :name  %><br>
-  <%= f.collection_select(:user_ids, User.all, :id, :name,
-                          {prompt: "Make your selection from the list below (can't be empty)"},
-                          { multiple: true, size: 3, class: "custom-select shadow rounded" }) %>
-
-
-  <%= f.submit class: "btn btn-success" %>
-
-<% end %>
+<div class="container m-5 p-5 justify-content-center">
+  <div class="signup-form">
+    <div class="col-xs-8 col-xs-offset-4">
+      <h2>Create Project</h2>
+    </div>
+    <%= render 'form' %>
+  </div>
+</div>

@@ -1,19 +1,12 @@
-Project title : <%= @project.name %>
-<% if current_user.user_type == 'manager' %>
-<%= link_to 'edit project',edit_project_path(@project) , class: "btn btn-success" %>
-  <%= link_to 'delete project',project_path(@project),method: :delete, data: {confirm: "Are you sure"}, class: "btn btn-danger"%>
-  <%end %>
-<p>
-  Users : <br>
-  <% @project.users.each do |user| %>
-  <%= user.name %><br>
-  <% end %>
-</p>
-
-<p>
-  Bugs : <br>
-  <% @project.bugs.each do |bug| %>
-    title : <%= bug.title %><br>
-    type  : <%= bug.status %><br>
-  <% end %>
-</p>
+<div class="container m-5 p-2">
+  <div class="card text-dark bg-light mb-3 " style="max-width: 18rem;">
+    <div class="card-header">Project title : <%= @project.name %></div>
+    Users :
+    <% @project.users.each do |user| %>
+      <div class="card-body">
+        <h5 class="card-title">name : <%= user.name %></h5>
+        <p class="card-text">type : <%= user.user_type %></p>
+      </div>
+    <% end %>
+  </div>
+</div>

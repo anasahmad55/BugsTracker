@@ -1,6 +1,8 @@
 <% @bugs.each do |bug| %>
   <% if current_user.projects.include? bug.project %>
-    <h3>Bug name :<%= link_to bug.title, bug_path(bug) %><br></h3>
-    project name : <%= bug.project.name %>
+    <div class="container shadow p-3 mb-3 bg-success rounded", id="bug">
+      <h3>Bug name : <%= link_to bug.title, bug_path(bug), id:"bugname" %> <span class="badge badge-secondary"><%= bug.status %></span></h3><br>
+      project name : <%= bug.project.name %>
+    </div>
   <% end %>
 <% end %>

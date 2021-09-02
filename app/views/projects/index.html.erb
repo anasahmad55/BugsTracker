@@ -1,10 +1,6 @@
-<h1>Projects</h1>
-<% @projects.each do |project| %>
-    <% project.users.each do |user| %>
-      <% if user.user_type == current_user.user_type %>
-        <h2><%=link_to project.name, project_path(project)%></h2><Br>
-    user names : <%= user.name %><br>
-    user type : <%= user.user_type %>
-    <% end %>
-<% end %>
-<%end %>
+<div class="container mt-5">
+  <h1>Projects</h1>
+  <% @projects.each do |project| %>
+    <h2>Project name : <%=link_to project.name, project_path(project)%></h2><Br>
+  <%end %>
+</div>
