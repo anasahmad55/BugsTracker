@@ -13,14 +13,14 @@
 
  */
 @import "bootstrap";
-
+$text-color: black;
 #signUp{
   width: 30%;
   background-color: #2c98a1;
 }
 body{
   background-color: #ccccc9;
-  color: black;
+  color: $text-color;
 }
 .navbar {
   background-color: #0e185b !important;
@@ -29,19 +29,18 @@ body{
   color: white !important;
 }
 .navbar-brand {
-  //font-size: 3rem;
   color: white;
 }
 #forget {
-  color: black;
+  color: $text-color;
 }
 .login{
-  color: black;
+  color: $text-color;
 }
 #bug{
   width: 30%;
 }
 #bugname{
-  color: black;
+  color: $text-color;
 }
 

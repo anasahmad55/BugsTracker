@@ -1,6 +1,8 @@
 class BugsController < ApplicationController
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
   def index
     @bugs = Bug.all
+    #@bugs = current_user.bugs
   end
 
   def new
@@ -11,22 +13,18 @@ class BugsController < ApplicationController
     @bug = Bug.new(params.require(:bug).permit(:title, :description, :deadline, :bug_type, :status, :project_id, :screenshot))
     @bug.user_id = current_user.id
     if @bug.save
+      UserMailer.with(user: current_user).welcome_email.deliver_later
       redirect_to bugs_path
     else
       render 'new'
     end
   end
 
-  def show
-    @bug = Bug.find(params[:id])
-  end
+  def show; end
 
-  def edit
-    @bug = Bug.find(params[:id])
-  end
+  def edit; end
 
   def update
-    @bug = Bug.find(params[:id])
     if @bug.update(params.require(:bug).permit(:status))
       flash[:notice] = "#{@bug.title} updated successfully"
       redirect_to @bug
@@ -35,4 +33,14 @@ class BugsController < ApplicationController
     end
   end
 
+  def destroy
+    @bug.destroy
+    redirect_to bug_path
+  end
+
+  private
+
+  def set_user
+    @bug = Bug.find(params[:id])
+  end
 end

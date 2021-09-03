@@ -1,12 +1,21 @@
 <div class="container m-5 p-2">
-  <div class="card text-dark bg-light mb-3 " style="max-width: 18rem;">
+  <div class="card text-dark bg-light m-3" style="max-width: 18rem;">
     <div class="card-header">Project title : <%= @project.name %></div>
-    Users :
-    <% @project.users.each do |user| %>
-      <div class="card-body">
-        <h5 class="card-title">name : <%= user.name %></h5>
-        <p class="card-text">type : <%= user.user_type %></p>
-      </div>
-    <% end %>
+    <div class="text-center">
+      <% if @project.users.empty? %>
+        <h3>No Users</h3>
+      <% else %>
+        <h3>Users</h3>
+        </div>
+        <% @project.users.each do |user| %>
+          <div class="card-body">
+            <h5 class="card-title">name : <%= user.name %></h5>
+            <p class="card-text">type : <%= user.user_type %></p>
+          </div>
+        <% end %>
+      <% end %>
+
+    <%= link_to 'Edit project', edit_project_path(@project), class: 'btn btn-success' %>
+    <%= link_to 'Delete project', project_path(@project), method: :delete, class: 'btn btn-danger', data: {confirm: "Are you sure" } %>
   </div>
 </div>

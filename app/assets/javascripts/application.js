@@ -15,6 +15,11 @@
 //= require turbolinks
 //= require_tree .
 
+//= require jquery3
+//= require popper
+//= require bootstrap
+
+
 var featureOrBug = {
     bug: ["new", "started", "resolved"],
     feature: ["new", "started", "complete"],
@@ -30,3 +35,4 @@ function changeStatus(value) {
         document.getElementById("bug_status").innerHTML = statusOptions;
     }
 }
+$('.alert').alert()

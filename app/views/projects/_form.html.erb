@@ -6,10 +6,18 @@
     </div>
   </div>
   <div class="form-group">
-    <%= f.label :name, class:"control-label col-xs-4" %>
+    <%= f.label :name,'Add developers', class:"control-label col-xs-4" %>
     <div class="col-xs-8">
-      <%= f.collection_select(:user_ids, User.all, :id, :name,
-                              {prompt: "Make your selection from the list below (can't be empty)"},
+      <%= f.collection_select(:user_ids, User.where(user_type: 'developer'), :id, :name,
+                              {prompt: "Make your selection from the list below"},
+                              { multiple: true, size: 3, class: "custom-select shadow rounded" }) %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :name,'Add qa', class:"control-label col-xs-4" %>
+    <div class="col-xs-8">
+      <%= f.collection_select(:user_ids, User.where(user_type: 'qa'), :id, :name,
+                              {prompt: "Make your selection from the list below "},
                               { multiple: true, size: 3, class: "custom-select shadow rounded" }) %>
     </div>
   </div>

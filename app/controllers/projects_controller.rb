@@ -1,4 +1,6 @@
 class ProjectsController < ApplicationController
+  before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :require_user
   def new
     @project = Project.new
   end
@@ -14,21 +16,16 @@ class ProjectsController < ApplicationController
 
   def index
     @projects = Project.all
-    if current_user.user_type == "developer"
+    if current_user.user_type == "developer" || current_user.user_type == "qa"
       @projects = current_user.projects
     end
   end
 
-  def show
-    @project = Project.find(params[:id])
-  end
+  def show;  end
 
-  def edit
-    @project = Project.find(params[:id])
-  end
+  def edit;  end
 
   def update
-    @project = Project.find(params[:id])
     if @project.update(params.require(:project).permit(:name, user_ids: []))
       flash[:notice] = "#{@project.name} updated successfully"
       redirect_to @project
@@ -38,8 +35,13 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
-    @project = Project.find(params[:id])
     @project.destroy
     redirect_to projects_path
+  end
+
+  private
+
+  def set_project
+    @project = Project.find(params[:id])
   end
 end

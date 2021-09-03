@@ -1,9 +1,18 @@
-<h1><%=@bug.bug_type%> details</h1>
-Title : <%= @bug.title %><br>
-Description : <%= @bug.description %><br>
-<%= form_for(@bug, url: bug_path(@bug) , html: {method: :patch}) do |f| %>
-  <%= f.label :status%><br>
-  <%= f.select :status, ['new', 'started', 'resolved']%>
-  <%= f.submit "save" %>
-<% end %>
-project name : <%= @bug.project.name %>
+<div class="container mt-3">
+  <h1><%=@bug.bug_type%> details</h1>
+  Title : <%= @bug.title %><br>
+  Description : <%= @bug.description %><br>
+  <%  if @bug.screenshot.attached? %>
+  image : <%= image_tag(@bug.screenshot, size: "100x100", alt: "bug image" ) %><br>
+    <% end %>
+  <%= form_for(@bug, url: bug_path(@bug) , html: {method: :patch}) do |f| %>
+    <%= f.label :status%>
+    <% if @bug.bug_type == 'feature' %>
+      <%= f.select :status, ['new', 'started', 'complete']%>
+    <% else %>
+      <%= f.select :status, ['new', 'started', 'resolved']%>
+    <% end %>
+    <%= f.submit "save" ,class:"btn btn-success"%>
+  <% end %>
+  project name : <%= @bug.project.name %>
+</div>
