@@ -5,3 +5,21 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+5.times do |i|
+  Bug.create(title: "Bug #{i}", description: "A product.", bug_type: "bug", status: "new")
+end
+
+5.times do |i|
+  Project.create(name: "project #{i}")
+end
+
+5.times do |i|
+  User.create(name: "user #{i} dev", user_type: "developer", email: "user#{i}dev@test.com", password:"password")
+end
+
+User.create(name: "user manger", user_type: "manager", email: "manager@test.com", password:"password")
+
+5.times do |i|
+  User.create(name: "user #{i} qa", user_type: "qa", email: "user#{i}qa@test.com", password:"password")
+end
