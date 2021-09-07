@@ -1,6 +1,6 @@
 class UserMailer < ApplicationMailer
-  def welcome_email
+  def created_bug
     @user = params[:user]
-    mail(to: @user.email, subject: 'Welcome to Bug Tracker')
+    mail(to: @user.email, subject: 'Bug Crested')
   end
 end

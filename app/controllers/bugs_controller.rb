@@ -13,7 +13,7 @@ class BugsController < ApplicationController
     @bug = Bug.new(params.require(:bug).permit(:title, :description, :deadline, :bug_type, :status, :project_id, :screenshot))
     @bug.user_id = current_user.id
     if @bug.save
-      UserMailer.with(user: current_user).welcome_email.deliver_later
+      UserMailer.with(user: current_user).created_bug.deliver_later
       redirect_to bugs_path
     else
       render 'new'
