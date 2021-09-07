@@ -10,6 +10,7 @@
   </head>
 
   <body>
+  <%= render 'layouts/nav' %>
   <% flash.each do |name, msg| %>
     <div class="alert alert-<%= name == "notice" ? "success" : "danger" %> alert-dismissible fade show" role="alert">
       <%= msg %>
@@ -18,7 +19,6 @@
       </button>
     </div>
   <% end %>
-  <%= render 'layouts/nav' %>
     <%= yield %>
   </body>
 </html>
