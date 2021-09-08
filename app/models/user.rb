@@ -15,4 +15,5 @@ class User < ApplicationRecord
             uniqueness: { case_sensitive: false },
             length: { maximum: 25 },
             format: { with: VALID_EMAIL_RAGEX }
+  USER_TYPES = ['manager', 'qa', 'developer']
 end

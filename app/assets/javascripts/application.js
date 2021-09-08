@@ -36,3 +36,7 @@ function changeStatus(value) {
     }
 }
 $('.alert').alert()
+
+function disableButton(value){
+
+}

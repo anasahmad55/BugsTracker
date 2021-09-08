@@ -1,8 +1,10 @@
 class BugsController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   def index
-    @bugs = Bug.all
-    #@bugs = current_user.bugs
+    projects = current_user.projects
+    @bugs = []
+    projects.each { |proj| @bugs.push(proj.bugs) }
+    @bugs.flatten!
   end
 
   def new
@@ -25,11 +27,15 @@ class BugsController < ApplicationController
   def edit; end
 
   def update
+    status = params.require(:bug).permit(:status)
+    if status['status'] == 'started'
+      @bug.bug_resolver_id = current_user.id
+    end
     if @bug.update(params.require(:bug).permit(:status))
       flash[:notice] = "#{@bug.title} updated successfully"
-      redirect_to @bug
+      redirect_to bugs_path
     else
-      render 'edit'
+      render 'show'
     end
   end
 

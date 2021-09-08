@@ -5,14 +5,18 @@
   <%  if @bug.screenshot.attached? %>
   image : <%= image_tag(@bug.screenshot, size: "100x100", alt: "bug image" ) %><br>
     <% end %>
-  <%= form_for(@bug, url: bug_path(@bug) , html: {method: :patch}) do |f| %>
+  <% if @bug.bug_resolver_id && current_user.id == @bug.bug_resolver_id || @bug.status =='new' %>
+  <%= form_for(@bug, url: bug_path(@bug), html: {method: :patch}) do |f| %>
     <%= f.label :status%>
     <% if @bug.bug_type == 'feature' %>
       <%= f.select :status, ['new', 'started', 'complete']%>
     <% else %>
       <%= f.select :status, ['new', 'started', 'resolved']%>
-    <% end %>
+    <% end %><br>
     <%= f.submit "save" ,class:"btn btn-success"%>
   <% end %>
+    <% else %>
+    status : <%= @bug.status %><br>
+    <%end %>
   project name : <%= @bug.project.name %>
 </div>
