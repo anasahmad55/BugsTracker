@@ -23,7 +23,9 @@
         <%= link_to 'Show', bug_path(bug), class:"btn btn-info"%>
       </div>
       <div class="card-footer text-muted">
-        deadline : <%= bug.deadline %>
+        <% if !bug.deadline.nil? %>
+          Deadline : <%= bug.deadline %>
+        <%end %>
       </div>
     </div>
     <% end %>
