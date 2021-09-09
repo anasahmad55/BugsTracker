@@ -17,7 +17,7 @@
           </div>
         <% end %>
         <div class="list-group-item list-group-item-action">
-          <% if @bug.bug_resolver_id && current_user.id == @bug.bug_resolver_id || @bug.status =='new' %>
+          <% if (@bug.bug_resolver_id && current_user.id == @bug.bug_resolver_id || @bug.status =='new') && current_user.user_type != 'qa' %>
             <%= form_for(@bug, url: bug_path(@bug), html: {method: :patch}) do |f| %>
               <%= f.label :status%>
               <% if @bug.bug_type == 'feature' %>

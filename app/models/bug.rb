@@ -4,6 +4,6 @@ class Bug < ApplicationRecord
   validates :title, presence: true,
                     uniqueness: { case_sensitive: false }
   has_one_attached :screenshot
-  validates :screenshot, blob: {  content_type: ['image/png', 'image/gif'] }
+  validates :screenshot, blob: { content_type: ['image/png', 'image/gif'] }
 
 end

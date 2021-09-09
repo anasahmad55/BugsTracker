@@ -14,7 +14,6 @@ User.create(name: "Ahmad", user_type: "qa", email: "bitf17a555@pucit.edu.pk", pa
 users = User.last(2).pluck(:id)
 Project.create(name: "example project", user_ids: users)
 
-
 Bug.create(title: "image bug", description: "A problem in image and it loads slowly due to big size", bug_type: "bug", status: "new", project_id: Project.last.id, user_id: User.last.id)
 Bug.create(title: "title bug", description: "A problem in title  and it does not contain capitalize functionality due", bug_type: "bug", status: "new", project_id: Project.last.id, user_id: User.last.id)
 Bug.create(title: "message feature", description: "A message featue should be added in application so users can talk each other", bug_type: "feature", status: "new", project_id: Project.last.id, user_id: User.last.id)
