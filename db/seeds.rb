@@ -5,21 +5,17 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+User.create(name: "Anas", user_type: "manager", email: "anas.ahmad@engin.tech", password:"password")
 
-5.times do |i|
-  Bug.create(title: "Bug #{i}", description: "A product.", bug_type: "bug", status: "new")
-end
+User.create(name: "fatir", user_type: "developer", email: "fatir@test.com", password:"password")
 
-5.times do |i|
-  Project.create(name: "project #{i}")
-end
+User.create(name: "Ahmad", user_type: "qa", email: "bitf17a555@pucit.edu.pk", password:"password")
 
-5.times do |i|
-  User.create(name: "user #{i} dev", user_type: "developer", email: "user#{i}dev@test.com", password:"password")
-end
+users = User.last(2).pluck(:id)
+Project.create(name: "example project", user_ids: users)
 
-User.create(name: "user manger", user_type: "manager", email: "manager@test.com", password:"password")
 
-5.times do |i|
-  User.create(name: "user #{i} qa", user_type: "qa", email: "user#{i}qa@test.com", password:"password")
-end
+Bug.create(title: "image bug", description: "A problem in image and it loads slowly due to big size", bug_type: "bug", status: "new", project_id: Project.last.id, user_id: User.last.id)
+Bug.create(title: "title bug", description: "A problem in title  and it does not contain capitalize functionality due", bug_type: "bug", status: "new", project_id: Project.last.id, user_id: User.last.id)
+Bug.create(title: "message feature", description: "A message featue should be added in application so users can talk each other", bug_type: "feature", status: "new", project_id: Project.last.id, user_id: User.last.id)
+

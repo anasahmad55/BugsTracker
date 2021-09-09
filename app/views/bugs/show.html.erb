@@ -1,22 +1,40 @@
 <div class="container mt-3">
-  <h1><%=@bug.bug_type%> details</h1>
-  Title : <%= @bug.title %><br>
-  Description : <%= @bug.description %><br>
-  <%  if @bug.screenshot.attached? %>
-  image : <%= image_tag(@bug.screenshot, size: "100x100", alt: "bug image" ) %><br>
-    <% end %>
-  <% if @bug.bug_resolver_id && current_user.id == @bug.bug_resolver_id || @bug.status =='new' %>
-  <%= form_for(@bug, url: bug_path(@bug), html: {method: :patch}) do |f| %>
-    <%= f.label :status%>
-    <% if @bug.bug_type == 'feature' %>
-      <%= f.select :status, ['new', 'started', 'complete']%>
-    <% else %>
-      <%= f.select :status, ['new', 'started', 'resolved']%>
-    <% end %><br>
-    <%= f.submit "save" ,class:"btn btn-success"%>
-  <% end %>
-    <% else %>
-    status : <%= @bug.status %><br>
-    <%end %>
-  project name : <%= @bug.project.name %>
+  <div class="row justify-content-md-center">
+    <div class="col-8 mt-4">
+      <div class="list-group">
+        <button type="button" class="list-group-item list-group-item-action active">
+          <%=@bug.bug_type%> details
+        </button>
+        <div class="list-group-item list-group-item-action">
+          Title : <%= @bug.title %>
+        </div>
+        <div class="list-group-item list-group-item-action">
+          Description : <%= @bug.description %>
+        </div>
+        <%  if @bug.screenshot.attached? %>
+          <div class="list-group-item list-group-item-action">
+            image : <%= image_tag(@bug.screenshot, size: "200x200", alt: "bug image" ) %>
+          </div>
+        <% end %>
+        <div class="list-group-item list-group-item-action">
+          <% if @bug.bug_resolver_id && current_user.id == @bug.bug_resolver_id || @bug.status =='new' %>
+            <%= form_for(@bug, url: bug_path(@bug), html: {method: :patch}) do |f| %>
+              <%= f.label :status%>
+              <% if @bug.bug_type == 'feature' %>
+                <%= f.select :status, ['new', 'started', 'complete']%>
+              <% else %>
+                <%= f.select :status, ['new', 'started', 'resolved']%>
+              <% end %>
+              <%= f.submit "save" ,class:"btn btn-success"%>
+            <% end %>
+          <% else %>
+            status : <%= @bug.status %>
+          <%end %>
+        </div>
+        <div class="list-group-item list-group-item-action">
+          project name : <%= @bug.project.name %>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

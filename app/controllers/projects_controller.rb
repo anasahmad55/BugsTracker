@@ -8,6 +8,8 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.new(params.require(:project).permit(:name, user_ids: []))
     if @project.save
+      UserMailer.with(user: current_user).created_project.deliver_later
+      flash[:notice] = "#{@project.name} created successfully"
       redirect_to projects_path
     else
       render 'new'
@@ -15,10 +17,11 @@ class ProjectsController < ApplicationController
   end
 
   def index
-    @projects = Project.all
-    if current_user.user_type == "developer" || current_user.user_type == "qa"
-      @projects = current_user.projects
-    end
+    @projects = if current_user.user_type == "developer" || current_user.user_type == "qa"
+                  current_user.projects
+                else
+                  Project.all
+                end
   end
 
   def show;  end
@@ -44,4 +47,5 @@ class ProjectsController < ApplicationController
   def set_project
     @project = Project.find(params[:id])
   end
+
 end

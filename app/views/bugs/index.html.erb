@@ -2,12 +2,33 @@
   <% if @bugs.length == 0 %>
     <h1>No bugs created yet</h1>
   <%else %>
+    <div class="row justify-content-md-center">
+      <div class="col-8 mt-4">
     <% @bugs.each do |bug| %>
-      <div class="container shadow p-3 mb-3 bg-success rounded", id="bug">
-        <h3><%= bug.bug_type %> name : <%= link_to bug.title, bug_path(bug), id:"bugname" %> <span class="badge badge-secondary"><%= bug.status %></span></h3><br>
-        project name : <%= bug.project.name %>
+    <div class="card text-center shadow mb-5 bg-white rounded", id="bugindex">
+      <div class="card-header">
+        <%= bug.bug_type.upcase %>
       </div>
+      <div class="card-body">
+        <h5 class="card-title"><%= bug.title %>
+          <span
+            <% if bug.status == 'new'%>class="badge badge-primary"
+            <% elsif bug.status == 'started'%>class="badge badge-secondary"
+            <% else %>class="badge badge-success"
+              <% end %>><%= bug.status %>
+          </span>
+        </h5>
+        <p class="card-text"><%= bug.description %></p>
+        <p class="card-text">project name : <%= bug.project.name %></p>
+        <%= link_to 'Show', bug_path(bug), class:"btn btn-info"%>
+      </div>
+      <div class="card-footer text-muted">
+        deadline : <%= bug.deadline %>
+      </div>
+    </div>
     <% end %>
+      </div>
+    </div>
   <% end %>
 </div>
 
